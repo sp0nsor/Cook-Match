@@ -1,4 +1,4 @@
-﻿namespace CookMatch.API.Contacts
+﻿namespace CookMatch.API.Contacts.Ingredients
 {
     public record IngredientResponse(
         string Name,

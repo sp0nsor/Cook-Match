@@ -34,8 +34,6 @@ namespace CookMatch.API.DataAccess.Repositories
             return recipes;
         }
 
-
-
         public async Task<Guid> Create(Recipe recipe)
         {
             var recipeEntity = new RecipeEntity
@@ -57,16 +55,6 @@ namespace CookMatch.API.DataAccess.Repositories
 
             return recipeEntity.Id;
         }
-
-/*        public async Task<Guid> Update(Recipe recipe)
-        {
-            await context.Recipes.Where(r => r.Id == recipe.Id)
-                .ExecuteUpdateAsync(s => s
-                .SetProperty(r =>  r.Name, recipe.Name)
-                .SetProperty(r => r.Ingredients))
-
-            return recipe.Id;
-        }*/
 
         public async Task<Guid> Update(Recipe recipe)
         {
@@ -99,7 +87,6 @@ namespace CookMatch.API.DataAccess.Repositories
 
             return recipe.Id;
         }
-
 
         public async Task<Guid> Delete(Guid id)
         {

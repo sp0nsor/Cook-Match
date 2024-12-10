@@ -1,6 +1,10 @@
 ﻿using CookMatch.API.Contacts;
+using CookMatch.API.Contacts.Ingredients;
+using CookMatch.API.Contacts.Recipes;
 using CookMatch.API.Core.Abstractions.Services;
+using CookMatch.API.Core.Enums;
 using CookMatch.API.Core.Models;
+using CookMatch.API.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -11,11 +15,12 @@ namespace CookMatch.API.Endpoints
     {
         public static IEndpointRouteBuilder MapRecipesEndpoits(this IEndpointRouteBuilder builder)
         {
-            var group = builder.MapGroup("api/Recipes");
-            group.MapPost("/", CreatRecipe);
-            group.MapGet("/", GetRecipes);
-            group.MapDelete("/{id:guid}", DeleteRecipe);
-            group.MapPut("/{id:guid}", UpdateRecipe);
+            var group = builder.MapGroup("api/Recipes").RequireAuthorization();
+
+            group.MapPost("/", CreatRecipe).RequirePermission(Permission.Create); ;
+            group.MapGet("/", GetRecipes).RequirePermission(Permission.Read);
+            group.MapDelete("/{id:guid}", DeleteRecipe).RequirePermission(Permission.Delete); ;
+            group.MapPut("/{id:guid}", UpdateRecipe).RequirePermission(Permission.Update); ;
 
             return builder;
         }
